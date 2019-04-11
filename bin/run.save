@@ -1,0 +1,5 @@
+#!/bin/bash
+export DOCKER_MACHINE_IP=`hostname -i`
+echo $DOCKEdoc/env.sh > env.js 
+/opt/app-root/bin/uploadfile-1.0/bin/uploadfile
+exec tail -f /dev/null
