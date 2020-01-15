@@ -11,9 +11,12 @@
 	
 	#Solving issues with jessi
 	RUN echo "deb [check-valid-until=no] http://archive.debian.org/debian jessie main" > /etc/apt/sources.list.d/jessie-backports.list
-	RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
-	RUN apt-get -o Acquire::Check-Valid-Until=false update
-	
+        RUN sed -i '/deb http:\/\/deb.debian.org\/debian jessie-updates main/d' /etc/apt/sources.list
+        RUN rm -rf /var/lib/apt/lists/* && apt update
+
+	#Installing Zip
+        RUN apt-get update && apt-get install -y unzip zip
+
 	# Moving my distribution to docker image
         COPY ./uploadfile-1.0.zip ${APP_ROOT}/bin
 	RUN cd ${APP_ROOT}/bin && unzip ${APP_ROOT}/bin/uploadfile-1.0.zip && chmod u+x ${APP_ROOT}/bin/uploadfile-1.0/bin/uploadfile && rm ${APP_ROOT}/bin/uploadfile-1.0.zip		
